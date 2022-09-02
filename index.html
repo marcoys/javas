@@ -161,6 +161,82 @@
         }
       },1000)
     </script>
+
+    <div style="overflow: hidden;">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="./img/car1.png" alt="">
+        </div>
+        <div class="slide-box">
+          <img src="./img/car2.png" alt="">
+        </div>
+        <div class="slide-box">
+          <img src="./img/car3.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <button class="prev">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
+
+    <script>
+      document.querySelector('.slide-1').addEventListener('click', function() {
+        document.querySelector('.slide-container').style.transform = 'translateX(0vw)'
+      })
+      document.querySelector('.slide-2').addEventListener('click', function() {
+        document.querySelector('.slide-container').style.transform = 'translateX(-100vw)'
+      })
+      document.querySelector('.slide-3').addEventListener('click', function() {
+        document.querySelector('.slide-container').style.transform = 'translateX(-200vw)'
+      })
+
+      let active = 1;
+
+      document.querySelector('.prev').addEventListener('click', function() {
+        document.querySelector('.slide-container').style.transform = `translateX(${active}00vw)`
+        active += 1;
+      })
+      
+      document.querySelector('.next').addEventListener('click', function() {
+        document.querySelector('.slide-container').style.transform = `translateX(-${active}00vw)`
+        active += 1;
+      })
+
+    </script>
+
+    <script>
+      function ms( a , b ) {
+        let min = a * 60 * 1000;
+        let sec = b * 1000;
+
+        console.log( min + sec )
+
+      }
+
+      ms(1, 30);
+      ms(2,10);
+
+    </script>
+
+    <script>
+      function disc( a , b ) {
+        let discount = a * 0.1
+        let total = a - discount;
+
+        if ( b == true ) {
+          total = total - 1.5;
+        }
+
+        return parseFloat(total.toFixed(2));
+      }
+
+      console.log(disc(70,false));
+      console.log(disc(10,true));
+    </script>
+   
 </body>
 
 </html>

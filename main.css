@@ -7,3 +7,6 @@
 .btn-danger {border: none; background-color: red; color: #fff; padding: 5px 10px; border-radius: 5px;} 
 .main-bg {padding: 100px 20px; background: lightgray;}
 .dark {background: black; color: #fff;}
+.slide-container {width: 300vw; transition: all 1s;}
+.slide-box {width: 100vw; float: left;}
+.slide-box img {width: 100%;}
