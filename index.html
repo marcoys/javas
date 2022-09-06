@@ -84,6 +84,20 @@
   </nav>
 
   <script>
+    window.addEventListener('scroll', function() {
+      let scHeight = window.scrollY;
+      console.log(scHeight);
+
+      if( scHeight >= 100 ) {
+        document.querySelector('.navbar-brand').style.fontSize = '10px';
+      } else {
+        document.querySelector('.navbar-brand').style.fontSize = '25px';
+      }
+    })
+  </script>
+
+  
+  <script>
     let count = 0;
 
     document.querySelector('.badge').addEventListener('click', function() {
@@ -108,6 +122,32 @@
     <h4>Shirts on Sale</h4>
     <button class="btn btn-danger" id="login">로그인</button>
   </div>
+
+  <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll;">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
+  </div>
+  <div class="stbar" style="width: 0%; height: 10px; background-color: #000; transition: all 0.2s;"></div>
+
+  <script>
+    document.querySelector('.lorem').addEventListener('scroll', function() {
+      var scryang = document.querySelector('.lorem').scrollTop;
+      var scrhe = document.querySelector('.lorem').scrollHeight;
+      var divhe = document.querySelector('.lorem').clientHeight;
+
+      let per = (scryang/(scrhe-divhe)*100).toFixed(0);
+
+      console.log(per);
+
+      document.querySelector('.stbar').style.width = per + '%';
+      
+      // if( scryang + divhe > scrhe - 10 ) {
+      //   alert('다봄');
+      // }
+    })
+  </script>
+
+
+  <div style="height: 1000px"></div>
 
   <script>
     document.querySelector('#login').addEventListener('click', function () {

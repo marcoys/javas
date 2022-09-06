@@ -1,3 +1,6 @@
+.navbar {position: fixed; width: 100%; z-index: 5;} 
+.navbar-brand {font-size: 25px; transition: all 1s;}
+
 .alert-box {background-color: skyblue; padding: 20px; color: white; border-radius: 5px; display: none;}
 .list-group {display: none; height: 0; transition: all 0.4s;}
 .list-group.show {height: 206px; top: 0; display: block;}
