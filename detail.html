@@ -60,12 +60,12 @@
 
       <script>
         var car = ['소나타', 50000, 'white']; //Array
-        var car2 = {name : '소나타', price : 50000}; //Object
+        var car2 = {name : '소나타', price : [50000, 3000, 40000]}; //Object
 
-        console.log(car2.name);
+        document.querySelector('#price2').innerHTML = car2.price[0];
 
-        document.getElementById('name2').innerHTML = car2.name;
-        document.getElementById('price2').innerHTML = car2.price;
+        // document.getElementById('name2').innerHTML = car2.name;
+        // document.getElementById('price2').innerHTML = car2.price;
       </script>
       
       <div class="container mt-5">
@@ -85,6 +85,53 @@
         </div>
       </div> 
 
+      <form class="container my-5 form-group sl-prd">
+        <p>상품선택</p>
+        <select class="form-select mt-2" onchange="openSize()">
+          <option>모자</option>
+          <option>셔츠</option>
+          <option>바지</option>
+        </select>
+    </form>
+
+    <form class="container my-5 form-group sl-size">
+      <p>사이즈</p>
+      <select class="form-select mt-2">
+        <option>95</option>
+        <option>100</option>
+        <option>105</option>
+      </select>
+  </form>
+
+  <div id="test">
+    
+  </div>
+
+  <script>
+    let 템플릿 = '<p>햐이</p>';
+    document.querySelector('#test').insertAdjacentHTML('beforeend', 템플릿);
+    $('#test').append(템플릿);
+  </script>
+
+  <script>
+    function openSize() {
+
+      let prdVal = $('.sl-prd select').val();
+
+      if (prdVal == '셔츠') {
+        $('.sl-size').css('display', 'block');
+        let stSize = `<option>95</option><option>100</option><option>105</option>`
+        $('.sl-size select').html(stSize);
+      } else if (prdVal == '바지') {
+        $('.sl-size').css('display', 'block');
+        let pantSize = `<option>30</option><option>32</option>`
+        $('.sl-size select').html(pantSize);
+      } else {
+        $('.sl-size').css('display', 'none');
+      }
+      
+    }
+  </script>
 
 </body>
 <script src="/tab.js"></script>
