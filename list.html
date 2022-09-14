@@ -62,6 +62,15 @@
 
       </script> 
 
+
+<script>
+  $.get('https://codingapple1.github.io/price.json').done(function(data) {
+    console.log(data.price);
+  }).fail(function() {
+    console.log('실패');
+  });
+</script>
+
 </body>
 <script src="/tab.js"></script>
 </html>

@@ -103,34 +103,85 @@
       </select>
   </form>
 
-  <div id="test">
-    
-  </div>
-
-  <script>
-    let 템플릿 = '<p>햐이</p>';
-    document.querySelector('#test').insertAdjacentHTML('beforeend', 템플릿);
-    $('#test').append(템플릿);
-  </script>
 
   <script>
     function openSize() {
 
       let prdVal = $('.sl-prd select').val();
+      const sSize = [95, 100, 105];
+      const pSize = [28, 30, 32, 34];
 
       if (prdVal == '셔츠') {
         $('.sl-size').css('display', 'block');
-        let stSize = `<option>95</option><option>100</option><option>105</option>`
-        $('.sl-size select').html(stSize);
+        $('.sl-size select').html('');
+        sSize.forEach(function(a) {
+          $('.sl-size select').append(`<option>${a}</option>`);
+        })
+        
       } else if (prdVal == '바지') {
         $('.sl-size').css('display', 'block');
-        let pantSize = `<option>30</option><option>32</option>`
-        $('.sl-size select').html(pantSize);
+        $('.sl-size select').html('');
+        pSize.forEach(function(p) {
+          $('.sl-size select').append(`<option>${p}</option>`)
+        })
       } else {
         $('.sl-size').css('display', 'none');
       }
       
     }
+  </script>
+
+  <script>
+    var 출석부 = ['흥민', '영희', '철수', '재석', '흥민'];
+
+
+    function 이름찾기(name) {
+      for ( i = 0; i < 출석부.length; i++) {
+        if (name == 출석부[i]) {
+          console.log('있어요');
+          return false;
+        }
+      }
+    }
+
+    이름찾기('흥민');
+  </script>
+
+  <!-- <script>
+    for( i = 2; i < 10; i++) {
+      for( a = 1; a < 10; a++) {
+        console.log(a * i);
+      }
+    }
+  </script> -->
+
+  <script>
+    function 평균(prev, cur) {
+      console.log(prev);
+      console.log(prev.length);
+      console.log(cur);
+
+      let arrSum = 0;
+      let arrleng = prev.length;
+      
+      for( let i = 0; i < prev.length; i++) {
+        arrSum += prev[i];
+      }
+
+      let arrgd = arrSum/arrleng;
+
+      console.log(arrgd);
+
+      if ( arrgd < cur ) {
+        let dif = cur - arrgd;
+        console.log(`평균보다 ${dif}점이 올랐네요`);
+      } else if ( arrgd > cur ) {
+        let difF = arrgd - cur;
+        console.log(`평균보다 ${difF}점이 떨어졋네요 재수추천`);
+      }
+    }
+
+    평균([40, 40, 40], 20);
   </script>
 
 </body>
