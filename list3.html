@@ -45,48 +45,31 @@
           <p>가격 : ${products[i].price}</p>
         </div>`);
     }
-  </script>
-
-  <script>
-    let moreClick = 0;
-
-    function addPrd(lod) {
-      $('.row').append(`<div class="col-sm-4">
-          <img src="https://via.placeholder.com/600" class="w-100">
-          <h5>${lod.title}</h5>
-          <p>가격 : ${lod.price}</p>
-        </div>`);
-    }
 
     $('#more').on('click', function () {
-      moreClick++;
-      console.log(moreClick);
-      
-      if (moreClick == 1) {
-        $.get('https://codingapple1.github.io/js/more1.json').done(function (data) {
-        console.log(data);
-        data.forEach((add, n) => {
-          addPrd(add);
-        });
-      }).fail(function () {
-        console.log('로드실패');
-      })
-      } else if( moreClick == 2 ) {
-        $.get('https://codingapple1.github.io/js/more2.json').done(function (data) {
-        console.log(data);
-        data.forEach((add, n) => {
-          addPrd(add);
-        });
-        $('#more').css('display', 'none');
-      }).fail(function () {
-        console.log('로드실패');
-      })
-      } else {
-        $('#more').css('display', 'none');
+        for( i = 0; i < prdNumb; i++) {
+          products[i].price.sort(function(a, b) {
+          return a - b;
+        })
       }
-
       
+      console.log(products);
     })
+
+    // let array = [7, 3, 5, 2, 40];
+    // let array2 = ['a', 'c', 'b'];
+
+    // array.sort(function(a, b) {
+    //   return a - b;
+    // }); //오름차순 정렬
+    // console.log(array);
+
+    // array2.sort(function(a, b) {
+    //   return a > b;
+    // }); //오름차순 정렬
+    // console.log(array2);
+
+
   </script>
 </body>
 <script src="/tab.js"></script>
