@@ -26,6 +26,18 @@
     <div class="container">
       <button class="btn btn-danger" id="more">더보기</button>
     </div>
+
+    <div class="container my-3">
+      <button class="btn btn-danger" id="price">가격순 정렬</button>
+    </div>
+
+    <div class="container my-3">
+      <button class="btn btn-danger" id="abc">상품명으로 정렬</button>
+    </div>
+
+    <div class="container my-3">
+      <button class="btn btn-danger" id="row">6만원 이하 상품보기</button>
+    </div>
   </div> 
 
   <script>
@@ -35,40 +47,129 @@
       { id: 2, price: 60000, title: 'Black Monastery' }
     ];
 
-    let prdNumb = products.length;
+    // let prdNumb = products.length;
     
-    for( i = 0; i < prdNumb; i++) {
+    // for( i = 0; i < prdNumb; i++) {
 
-      $('.row').append(`<div class="col-sm-4">
+    //   $('.row').append(`<div class="col-sm-4">
+    //       <img src="https://via.placeholder.com/600" class="w-100">
+    //       <h5>${products[i].title}</h5>
+    //       <p>가격 : ${products[i].price}</p>
+    //     </div>`);
+    // }
+
+    function templ(a, i) {
+        let templet_A = `<div class="col-sm-4">
           <img src="https://via.placeholder.com/600" class="w-100">
-          <h5>${products[i].title}</h5>
-          <p>가격 : ${products[i].price}</p>
-        </div>`);
+          <h5>${a[i].title}</h5>
+          <p>가격 : ${a[i].price}</p>
+          <button class="buy">구매</button>
+        </div>`;
+
+        $('.row').append(templet_A);
     }
 
-    $('#more').on('click', function () {
-        for( i = 0; i < prdNumb; i++) {
-          products[i].price.sort(function(a, b) {
-          return a - b;
-        })
-      }
-      
+    products.forEach((a, i) => {
+      templ(products, i);
+    })
+
+      let arr = [1, 2, 3];
+      let newarr = JSON.stringify(arr);
+
+      localStorage.setItem('num', newarr);
+      let sss = localStorage.getItem('num');
+      let newsss = JSON.parse(sss);
+      console.log(newsss[0]);
+
+    $('#price').on('click', function () {
+        
+      products.sort(function (a, b) {
+        return a.price - b.price;
+      })
+
+      console.log(products);
+
+      $('.row').html('');
+
+      products.forEach((a, i) => {
+        templ(products, i);
+      })
+    })
+
+    $('#abc').on('click', function (a, b) {
+      products.sort(function(a, b) {
+        let abcA = a.title.toUpperCase();
+        let abcB = b.title.toUpperCase();
+
+        if( abcA < abcB ) {
+          return 1;
+        } else if ( abcA > abcB ) {
+          return -1;
+        }
+        return 0;
+        
+      })
+
+      $('.row').html('');
+
+      products.forEach((a, i) => {
+        templ(products, i);
+      });
       console.log(products);
     })
 
-    // let array = [7, 3, 5, 2, 40];
-    // let array2 = ['a', 'c', 'b'];
+    $('#row').on('click', function (a, b) {
+      let rowf = products.filter(function(a) {
+        return a.price <= 60000;
+      })
+      console.log(rowf);
 
-    // array.sort(function(a, b) {
-    //   return a - b;
-    // }); //오름차순 정렬
-    // console.log(array);
+      $('.row').html('');
 
-    // array2.sort(function(a, b) {
-    //   return a > b;
-    // }); //오름차순 정렬
-    // console.log(array2);
+      rowf.forEach((a, i) => {
+        templ(rowf, i);
+      })
+    })
 
+    let buyName = [];
+
+    $('.buy').on('click', function() {
+      
+      buyName.push($(this).siblings('h5').html());
+
+      let stName = JSON.stringify(buyName);
+
+      localStorage.setItem('name', stName);
+
+      console.log(buyName);
+    })
+
+
+
+    let array = [7, 3, 5, 2, 40];
+    let array2 = ['a', 'c', 'b'];
+    let array3 = [7, 3, 5, 2, 40];
+    let array4 = [7, 3, 5, 2, 40];
+
+
+    array.sort(function(a, b) {
+      return a - b;
+    }); //오름차순 정렬
+    console.log(array);
+
+    array2.sort(); //가나다순 정렬
+
+    console.log(array2);
+
+    let newarr3 = array3.filter(function(a) {
+      return a < 4;
+    });
+    console.log(newarr3);
+
+    let newarr4 = array4.map(function(a) {
+      return a * 4;
+    })
+    console.log(newarr4);
 
   </script>
 </body>
