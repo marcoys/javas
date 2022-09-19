@@ -131,17 +131,21 @@
       })
     })
 
-    let buyName = [];
 
-    $('.buy').on('click', function() {
-      
-      buyName.push($(this).siblings('h5').html());
+    $('.buy').on('click', function() {  
+      let thisTit = $(this).siblings('h5').html();
 
-      let stName = JSON.stringify(buyName);
+      if( localStorage.getItem('cart') != null) {
+        let pull = JSON.parse(localStorage.cart);
+        
+        pull.push(thisTit);
+        localStorage.setItem('cart', JSON.stringify(pull));
 
-      localStorage.setItem('name', stName);
-
-      console.log(buyName);
+        console.log(pull);
+      } else {
+        localStorage.setItem('cart', JSON.stringify([thisTit]))
+      }
+  
     })
 
 
