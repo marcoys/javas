@@ -137,13 +137,19 @@
 
       if( localStorage.getItem('cart') != null) {
         let pull = JSON.parse(localStorage.cart);
-        
+
+        for (i = 0; i < pull.length; i++) {
+          let saved = pull[i];
+          console.log(saved);
+        }
+
+      
         pull.push(thisTit);
         localStorage.setItem('cart', JSON.stringify(pull));
-
         console.log(pull);
       } else {
-        localStorage.setItem('cart', JSON.stringify([thisTit]))
+        localStorage.setItem('cart', JSON.stringify([thisTit]));
+        console.log(JSON.stringify([thisTit]));
       }
   
     })

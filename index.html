@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="main.css">
   <!-- <script src="369.js"></script> -->
   <script src="test.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -98,7 +99,7 @@
   <script>
     window.addEventListener('scroll', function() {
       let scHeight = window.scrollY;
-      console.log(scHeight);
+      // console.log(scHeight);
 
       if( scHeight >= 100 ) {
         document.querySelector('.navbar-brand').style.fontSize = '10px';
@@ -217,13 +218,13 @@
     <div style="overflow: hidden;">
       <div class="slide-container">
         <div class="slide-box">
-          <img src="./img/car1.png" alt="">
+          <img src="./img/car1.png" alt="" draggable="false">
         </div>
         <div class="slide-box">
-          <img src="./img/car2.png" alt="">
+          <img src="./img/car2.png" alt="" draggable="false">
         </div>
         <div class="slide-box">
-          <img src="./img/car3.png" alt="">
+          <img src="./img/car3.png" alt="" draggable="false">
         </div>
       </div>
     </div>
@@ -257,6 +258,23 @@
         active += 1;
       })
 
+    </script>
+
+    <script>
+      let start = 0;
+      let clked = false;
+
+      $('.slide-box').eq(0).on('mousedown', function(e) {
+        start = e.clientX;
+        let clked = true;
+      })
+
+      $('.slide-box').eq(0).on('mousemove', function(e) {
+        if(clked == true) {
+          $('.slide-container').css('transform', `translateX(${e.clientX - start}px)`)
+        }
+        
+      })
     </script>
 
     <script>
