@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="test.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="top-menu">
+    <h1>집꾸미기</h1>
+    <ul>
+      <li><a href="">Home</a></li>
+      <li><a href="">스토어</a></li>
+      <li><a href="">시공견적</a></li>
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <div class="contents">
+      <div class="src-wrap">
+        <form action="">
+          <input type="text" placeholder="검색어입력">
+        </form>
+      </div>
+      <div class="prd-wrap">
+        <ul>
+          <!-- <li class="prd-box">
+                        <img src="/test/pr1.JPG" alt="">
+                        <h3 class="prd-tit">
+                            식기세척기
+                        </h3>
+                        <h4 class="prd-comp">
+                            세척나라
+                        </h4>
+                        <h5 class="prd-price">
+                            가격 : 10000
+                        </h5>
+                        <button>담기</button>
+                    </li> -->
+        </ul>
+      </div>
+      <div class="cart-wrap">
+        <h5>장바구니</h5>
+        <div id="drag-box">
+          <p>여기로 드래그</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $.getJSON('/test/store.json').done((data) => {
+
+      console.log(data.products);
+
+      let products = data.products;
+      console.log(products);
+
+      function liTempl(arr, i) {
+        let liForm = `<li class="prd-box">
+                        <img src="/test/${arr[i].photo}" alt="">
+                        <h3 class="prd-tit">
+                            ${arr[i].title}
+                        </h3>
+                        <h4 class="prd-comp">
+                            ${arr[i].brand}
+                        </h4>
+                        <h5 class="prd-price">
+                            가격 : ${arr[i].price}
+                        </h5>
+                        <button>담기</button>
+                    </li>`
+
+        $('.prd-wrap ul').append(liForm);
+      }
+
+      products.forEach((a, i) => {
+        liTempl(products, i);
+      });
+
+      $('.src-wrap input').on('input', function () {
+        let keyword = $('.src-wrap input').val();
+
+        let newProducts = products.filter((a) => {
+          return a.title.includes(keyword) || a.brand.includes(keyword)
+        })
+
+        $('.prd-wrap ul').html('');
+
+        newProducts.forEach((a, i) => {
+          liTempl(newProducts, i);
+        })
+
+        $('.prd-tit').each(function (i, ele) {
+          let title = ele.innerHTML;
+
+          title = title.replace(keyword, `<span style="background: yellow;">${keyword}</span>`);
+
+          ele.innerHTML = title;
+        })
+      })
+
+
+    }).fail(() => {
+      console.log('데이터 로딩 실패')
+    })
+  </script>
+</body>
+
+</html>

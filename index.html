@@ -266,13 +266,66 @@
 
       $('.slide-box').eq(0).on('mousedown', function(e) {
         start = e.clientX;
-        let clked = true;
+        clked = true;
       })
 
       $('.slide-box').eq(0).on('mousemove', function(e) {
         if(clked == true) {
           $('.slide-container').css('transform', `translateX(${e.clientX - start}px)`)
         }
+        console.log(e.clientX - start)
+      })
+      
+      $('.slide-box').eq(0).on('mouseup', function(e) {
+        clked = false;
+        let imgW = $('.slide-box').width();
+
+        if(e.clientX - start < -200) {
+          $('.slide-container')
+          .css('transition', 'all 0.5s')
+          .css('transform', `translateX(-${imgW}px)`)
+        } else {
+          $('.slide-container')
+          .css('transition', 'all 0.5s')
+          .css('transform', 'translateX(0px)')
+        }
+
+        setTimeout(() => {
+          $('.slide-container').css('transition', 'none');
+        }, 500)
+        
+      })
+
+      //모바일
+      // Hammer.js 라이브러리
+      $('.slide-box').eq(0).on('touchstart', function(e) {
+        start = e.touches[0].clientX;
+        clked = true;
+      })
+
+      $('.slide-box').eq(0).on('touchmove', function(e) {
+        if(clked == true) {
+          $('.slide-container').css('transform', `translateX(${e.touches[0].clientX - start}px)`)
+        }
+      })
+      
+      $('.slide-box').eq(0).on('touchend', function(e) {
+        clked = false;
+        let imgW = $('.slide-box').width();
+
+        if(e.changedTouches[0].clientX - start < -200) {
+          $('.slide-container')
+          .css('transition', 'all 0.5s')
+          .css('transform', `translateX(-${imgW}px)`)
+        } else {
+          $('.slide-container')
+          .css('transition', 'all 0.5s')
+          .css('transform', 'translateX(0px)')
+        }
+
+        setTimeout(() => {
+          $('.slide-container').css('transition', 'none');
+        }, 500)
         
       })
     </script>
