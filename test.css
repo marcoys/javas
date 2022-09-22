@@ -23,3 +23,13 @@ a {text-decoration: none; }
 .cart-wrap h5 {font-weight: 600; font-size: 20px; padding: 20px 10px 10px 10px;}
 .cart-wrap #drag-box {background: #000; width: 100%; height: 300px;}
 .cart-wrap #drag-box p {color: #fff; font-weight: 600; text-align: center; line-height: 300px;-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none}
+
+#drag-box {text-align: center;}
+#drag-box ul {display: inline-block;}
+#drag-box ul::after {display: block; clear: both; content: "";}
+#drag-box ul li {float: left; background: #fff; padding: 20px; box-sizing: border-box;}
+#drag-box ul li:last-child {margin-right: 0;}
+#drag-box ul li img {width: 100%; height: auto;}
+#drag-box ul li h3 {font-size: 18px; font-weight: 600; margin: 10px 0;}
+#drag-box ul li h4 {font-size: 14px; color: #777777; margin: 10px 0;}
+#drag-box ul li h5 {font-size: 16px; font-weight: 500;}

@@ -49,6 +49,7 @@
         <h5>장바구니</h5>
         <div id="drag-box">
           <p>여기로 드래그</p>
+          <ul></ul>
         </div>
       </div>
     </div>
@@ -62,8 +63,14 @@
       let products = data.products;
       console.log(products);
 
+      //===========
+      // 리스트 템플릿
+      //===========
+
       function liTempl(arr, i) {
-        let liForm = `<li class="prd-box">
+
+        $('.prd-wrap ul').append(
+          `<li class="prd-box" draggable="true" data-id="${arr[i].id}">
                         <img src="/test/${arr[i].photo}" alt="">
                         <h3 class="prd-tit">
                             ${arr[i].title}
@@ -74,16 +81,17 @@
                         <h5 class="prd-price">
                             가격 : ${arr[i].price}
                         </h5>
-                        <button>담기</button>
-                    </li>`
-
-        $('.prd-wrap ul').append(liForm);
+                        <button data-id="${arr[i].id}">담기</button>
+                    </li>`);
       }
 
       products.forEach((a, i) => {
         liTempl(products, i);
       });
 
+      //========
+      // 검색 기능
+      //========
       $('.src-wrap input').on('input', function () {
         let keyword = $('.src-wrap input').val();
 
@@ -106,6 +114,50 @@
         })
       })
 
+      //===========
+      // 담기 이벤트
+      //===========
+      let cartArr = [];
+      $('.prd-box button').on('click', function(e) {
+        let dataID = e.target.dataset.id
+        
+
+        cartArr = cartArr.push(dataID);
+        $('#drag-box p').css('display', 'none');
+        $('#drag-box ul').append(`
+        <li class="cart-prd" draggable="true" data-id="${products[dataID].id}">
+                        <img src="/test/${products[dataID].photo}" alt="">
+                        <h3 class="prd-tit">
+                            ${products[dataID].title}
+                        </h3>
+                        <h4 class="prd-comp">
+                            ${products[dataID].brand}
+                        </h4>
+                        <h5 class="prd-price">
+                            가격 : ${products[dataID].price}
+                        </h5>
+                    </li>`);
+
+        console.log(cartArr);
+
+      })
+
+      //===========
+      // 드래그 이벤트
+      //===========
+      $('.prd-box').on('dragstart', function(ev) {
+        ev.originalEvent.dataTransfer.setData('id', ev.target.dataset.id);
+      });
+
+      $('#drag-box').on('dragover', function(ev) {
+        ev.preventDefault();
+      });
+
+      $('#drag-box').on('drag', function(ev) {
+        let productCopy = ev.originalEvent.dataTransfer.getData('id');
+        console.log(productCopy);
+
+      });
 
     }).fail(() => {
       console.log('데이터 로딩 실패')
